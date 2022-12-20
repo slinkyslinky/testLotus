@@ -1,0 +1,14 @@
+@use '../../variables/colors.scss' as *;
+
+
+.timer {
+   text-align: center;
+   color: $red;
+   background-color: $light-red;
+   font-weight: 500;
+
+
+   &--closed {
+      opacity: 0;
+   }
+}

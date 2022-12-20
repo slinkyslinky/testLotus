@@ -11,8 +11,10 @@ type Props = {
 export default function TableHeader({ name, id, number }: Props) {
    return (
       <th className='table-header'>
-         <span>Участник №{number}</span>
-         <span>{name}</span>
+         <p className='table-header__member'>Участник №{number}</p>
+         <div className="table-header__name">
+            <span>{name}</span>
+         </div>
       </th>
    )
 }

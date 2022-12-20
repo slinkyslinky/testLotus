@@ -1,0 +1,23 @@
+$black: #404040;
+$blue: #588EA3;
+$green: #3D773E;
+$red: #AA4645;
+$light-red: #F9F2F4;
+$grey: #f0f0f0;
+
+$table-even: $grey;
+
+.text-blue {
+   color: $blue;
+   font-weight: 500;
+}
+
+.text-red {
+   font-weight: 500;
+   color: $red
+}
+
+.text-green {
+   font-weight: 500;
+   color: $green
+}

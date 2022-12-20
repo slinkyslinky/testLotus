@@ -1,0 +1,63 @@
+@use '../../variables/colors.scss' as *;
+
+table {
+   display: table;
+   border-collapse: collapse;
+
+   width: 100%;
+   margin-top: 30px;
+}
+
+
+
+.table__wrapper {
+
+
+   width: 100%;
+   overflow-x: auto;
+
+}
+
+
+thead {
+   color: $blue;
+
+
+   th {
+      min-width: 80px;
+      max-width: 100px;
+      padding: 10px 10px;
+      height: 40px;
+      text-transform: uppercase;
+      font-weight: 600;
+   }
+
+   td {
+
+      min-height: 40px;
+      text-transform: uppercase;
+   }
+}
+
+tbody {
+   border-top: 1px solid grey;
+
+   th {
+      font-weight: 600;
+      text-align: left;
+      padding: 5px 20px 5px 10px;
+      max-width: 60px;
+      min-width: 40px;
+   }
+
+   tr:nth-child(odd) {
+      background-color: $table-even;
+   }
+
+
+
+   td {
+      text-align: center;
+      padding: 10px 10px;
+   }
+}

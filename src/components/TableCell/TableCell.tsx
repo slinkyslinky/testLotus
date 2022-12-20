@@ -1,4 +1,5 @@
 import React from 'react'
+import { priceMask } from '../../utils/priceMask'
 import { PARAM_EVENT, PARAM_GARANTEE_TIME, PARAM_PREPAYMENTS, PARAM_PRICE, PARAM_TERM } from '../../variables/paramsConsts'
 
 import './TableCell.scss'
@@ -30,9 +31,9 @@ export default function TableCell({ data, type }: Props) {
       case PARAM_PRICE:
          return (
             <td>
-               <div>{data.PARAM_ACTUAL_PRICE}</div>
-               <div>-{data.PARAM_TAX}</div>
-               <div>{data.PARAM_GOARL_PRICE}</div>
+               <div className='text-blue'>{priceMask(data.PARAM_ACTUAL_PRICE)} </div>
+               <div className='text-red'>-{priceMask(data.PARAM_TAX)} </div>
+               <div className='text-green'>{priceMask(data.PARAM_GOARL_PRICE)} </div>
             </td>
          )
       default:

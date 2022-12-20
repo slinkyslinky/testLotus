@@ -1,0 +1,40 @@
+@use '../../variables/colors.scss' as *;
+
+
+h1 {
+   font-weight: 400;
+   margin: 0;
+   padding: 20px 0;
+   color: $red;
+   font-size: 1.3rem;
+   display: block;
+   position: relative;
+
+   &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+
+      background-color: $grey ;
+   }
+}
+
+.header__name {
+   font-weight: 500;
+}
+
+.header__subtitle {
+   padding: 10px 0;
+
+}
+
+.header__warning {
+   line-height: 1.5rem;
+   padding: 0 5px;
+   color: $red;
+   background-color: $light-red;
+   font-size: 0.9rem;
+}
