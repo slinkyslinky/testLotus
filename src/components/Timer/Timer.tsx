@@ -1,54 +1,74 @@
 import React, { useEffect, useState } from 'react'
+
 import './Timer.scss'
 
 type Props = {
-  start: number,
-  finish: number,
+
   memberOrder: number,
   turn: number,
-  setTurn: any,
+  leftTime: number,
   membersNumber: number,
+  setTimerUpdate: any
 }
 
-export default function Timer({ start, finish, memberOrder, turn, setTurn, membersNumber }: Props) {
+export default function Timer({ memberOrder, turn, leftTime, membersNumber, setTimerUpdate }: Props) {
 
-  const [time, setTime] = useState((start - finish) / 1000)
+
+  const [time, setTime] = useState(leftTime)
+
+  let visibleTime = 0;
+
+  if (time >= 0) {
+    visibleTime = time
+  } else {
+    visibleTime = 0
+  }
+
+
+
+
+
+  console.log('timer render', time, ' ', leftTime);
+
+
+
+
+
+
+
+
+
 
   useEffect(() => {
+    if (time > 0) {
+      const timer = setTimeout(() => {
 
+        setTime(time - 1)
+
+      }, 1000)
+
+    }
+    if (time <= -10) {
+      console.error("Something went Wrong")
+    } else
+      if (time <= 0) {
+        console.log('useEffect');
+        const timer = setTimeout(() => {
+
+          setTime(time - 1)
+
+        }, 1000)
+
+        setTimerUpdate({})
+      }
   }, [time])
 
 
-  if (turn !== memberOrder) {
-    return <td className='timer timer--closed'></td>
-  }
 
 
-
-
-  const timer = setTimeout(() => {
-
-    setTime(time - 1)
-
-  }, 1000)
-
-  if (time === 0) {
-    clearTimeout(timer)
-    setTimeout(() => {
-      setTime((start - finish) / 1000)
-      if (turn === membersNumber) {
-        setTurn(1)
-      } else {
-        setTurn(turn + 1)
-      }
-    }, 500)
-
-  }
-
-
-  const hoursLeft = addZero(Math.floor(time / 3600));
-  const minutesLeft = addZero(Math.floor(time % 3600 / 60));
-  const secondsLeft = addZero(Math.floor(time % 3600 % 60))
+  const hoursLeft = addZero(Math.floor(visibleTime / 3600));
+  const minutesLeft = addZero(Math.floor(visibleTime % 3600 / 60));
+  const secondsLeft = addZero(Math.floor(visibleTime % 3600 % 60))
 
   function addZero(value: number) {
     return (value < 10) ? '0' + value.toString() : value.toString()
@@ -56,7 +76,7 @@ export default function Timer({ start, finish, memberOrder, turn, setTurn, membe
 
 
   return (
-    <td className='timer' id='timer'>
+    <td className='timer' id='timer' >
       <div className="timer__time">{hoursLeft}:{minutesLeft}:{secondsLeft}</div>
     </td>
   )

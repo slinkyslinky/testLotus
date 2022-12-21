@@ -28,5 +28,9 @@ export interface Param {
    id: keyof Fields
 }
 
+export type TimerData = {
+   turn: number,
+   finishTime: number
+}
 
 
