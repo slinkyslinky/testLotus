@@ -3,12 +3,11 @@ import './TableHeader.scss'
 
 type Props = {
    name: string,
-   id: number,
    number: number,
 
 }
 
-export default function TableHeader({ name, id, number }: Props) {
+export default function TableHeader({ name, number }: Props) {
    return (
       <th className='table-header'>
          <p className='table-header__member'>Участник №{number}</p>

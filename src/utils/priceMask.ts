@@ -9,7 +9,6 @@ export function priceMask(price: number) {
 
    }
 
-
    return priceArray.join('') + ' руб.'
 
 

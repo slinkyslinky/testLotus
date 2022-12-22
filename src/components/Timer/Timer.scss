@@ -2,6 +2,8 @@
 
 
 .timer {
+
+
    text-align: center;
    color: $red;
    background-color: $light-red;
@@ -10,5 +12,44 @@
 
    &--closed {
       opacity: 0;
+   }
+
+   &__flex-wrap {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10%;
+
+   }
+
+   .hourglass,
+   .flex-add {
+
+      width: 15px;
+      height: 15px;
+
+   }
+
+   .hourglass {
+      fill: $red;
+      // animation: hourglass-rotate 5s infinite;
+   }
+
+
+
+}
+
+@keyframes hourglass-rotate {
+   0% {
+      transform: rotateZ(0deg)
+   }
+
+   75% {
+      transform: rotateZ(0deg)
+   }
+
+   100% {
+      transform: rotateZ(360deg);
    }
 }

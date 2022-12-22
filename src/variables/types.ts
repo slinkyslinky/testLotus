@@ -8,6 +8,14 @@ export interface Member {
    fields: Fields
 }
 
+export type Config = {
+   name: string,
+   startDate: string,
+   startTime: string,
+   turnTime: number,
+   goalPrice: number,
+   members: number[]
+}
 
 export type Fields = {
    [PARAM_EVENT]: boolean,

@@ -7,7 +7,7 @@ export const listOfParams: Param[] = [
       id: PARAM_EVENT
    },
    {
-      name: "Срок изготовления лота, дней",
+      name: "Срок изготовления лота, дни",
       id: PARAM_TERM
    },
    {

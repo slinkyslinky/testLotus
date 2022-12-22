@@ -13,3 +13,9 @@ body {
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
    font-size: calc(0.625rem + ((1vw - 3.2px) * 0.375));
 }
+
+.problem-message {
+   font-size: 2rem;
+   text-align: center;
+   padding: 200px 50px 0;
+}

@@ -1,39 +1,40 @@
+
 import React, { useEffect, useState } from 'react'
 import { SERVER_URL } from '../../variables/config'
 import { listOfParams } from '../../variables/listOfParams'
-import { data } from '../../variables/members'
-import { TimerData } from '../../variables/types'
+
+import { Config, Member, TimerData } from '../../variables/types'
 import TableHeader from '../TableHeader/TableHeader'
 import TableRow from '../TableRow/TableRow'
 import Timer from '../Timer/Timer'
 
 import './Table.scss'
 
-export default function Table() {
+type Props = {
+   config: Config,
+   members: Member[]
+}
 
+export default function Table({ config, members }: Props) {
 
-   const membersNumber = data.length
-
-   const now = Math.floor(new Date().getTime() / 1000)
-   const [timerData, setTimerData] = useState({ turn: 0, finishTime: now })
+   const [timerData, setTimerData] = useState({ turn: 0, finishTime: new Date().getTime() })
    const [timerUpdate, setTimerUpdate] = useState({})
-
-   console.log(timerUpdate);
 
    useEffect(() => {
       fetch(SERVER_URL + "getTimer", {
          method: "GET",
-      }).then(response => response.json())
+      })
+         .then(response => response.json())
          .then((data: TimerData) => {
             setTimerData({ turn: data.turn, finishTime: data.finishTime })
-
          })
-
 
    }, [timerUpdate])
 
 
 
+   const membersList: Member[] = members.filter((member) => config.members.includes(member.id));
+   membersList.forEach(member => member.fields.PARAM_PRICE.PARAM_GOARL_PRICE = config.goalPrice)
 
 
 
@@ -44,23 +45,25 @@ export default function Table() {
             <thead>
                <tr>
                   <th>Ход</th>
-                  {data.map(member => {
-                     if ((data.indexOf(member) + 1) === timerData.turn) {
-                        console.log('table render ', timerData);
+                  {membersList.map(member => {
+                     if ((membersList.indexOf(member) + 1) === timerData.turn) {
 
-                        return <Timer key={member.id} memberOrder={data.indexOf(member) + 1} turn={timerData.turn} leftTime={timerData.finishTime - now} setTimerUpdate={setTimerUpdate} membersNumber={membersNumber} />
+
+                        return <Timer key={member.id} finishTime={timerData.finishTime} setTimerUpdate={setTimerUpdate} />
                      } else
                         return <td key={member.id} className='timer timer--closed'></td>
                   })}
                </tr>
                <tr>
                   <th>Параметры и требования</th>
-                  {data.map(member => <TableHeader key={member.id} name={member.name} id={member.id} number={data.indexOf(member) + 1} />)}
+                  {
+                     membersList.map(member => <TableHeader key={member.id} name={member.name} number={membersList.indexOf(member) + 1} />)
+                  }
                </tr>
 
             </thead>
             <tbody>
-               {listOfParams.map(param => <TableRow key={param.id} param={param} data={data} />)}
+               {listOfParams.map(param => <TableRow key={param.id} param={param} data={membersList} />)}
             </tbody>
 
          </table>

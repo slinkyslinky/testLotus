@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react'
+import HourGlass from '../../assets/HourGlass'
 
 import './Timer.scss'
 
 type Props = {
 
-  memberOrder: number,
-  turn: number,
-  leftTime: number,
-  membersNumber: number,
+
+  finishTime: number,
+
   setTimerUpdate: any
 }
 
-export default function Timer({ memberOrder, turn, leftTime, membersNumber, setTimerUpdate }: Props) {
+export default function Timer({ finishTime, setTimerUpdate }: Props) {
 
 
-  const [time, setTime] = useState(leftTime)
-
+  const [time, setTime] = useState(finishTime - new Date().getTime())
   let visibleTime = 0;
 
   if (time >= 0) {
@@ -25,40 +24,18 @@ export default function Timer({ memberOrder, turn, leftTime, membersNumber, setT
   }
 
 
-
-
-
-  console.log('timer render', time, ' ', leftTime);
-
-
-
-
-
-
-
-
+  const timer = setTimeout(() => {
+    setTime(finishTime - new Date().getTime())
+  }, 500)
 
 
   useEffect(() => {
-    if (time > 0) {
-      const timer = setTimeout(() => {
 
-        setTime(time - 1)
-
-      }, 1000)
-
-    }
-    if (time <= -10) {
+    if (time <= -10 * 1000) {
       console.error("Something went Wrong")
+      clearTimeout(timer)
     } else
       if (time <= 0) {
-        console.log('useEffect');
-        const timer = setTimeout(() => {
-
-          setTime(time - 1)
-
-        }, 1000)
-
         setTimerUpdate({})
       }
   }, [time])
@@ -66,9 +43,9 @@ export default function Timer({ memberOrder, turn, leftTime, membersNumber, setT
 
 
 
-  const hoursLeft = addZero(Math.floor(visibleTime / 3600));
-  const minutesLeft = addZero(Math.floor(visibleTime % 3600 / 60));
-  const secondsLeft = addZero(Math.floor(visibleTime % 3600 % 60))
+  const hoursLeft = addZero(Math.floor(visibleTime / 1000 / 3600));
+  const minutesLeft = addZero(Math.floor(visibleTime / 1000 % 3600 / 60));
+  const secondsLeft = addZero(Math.floor(visibleTime / 1000 % 3600 % 60))
 
   function addZero(value: number) {
     return (value < 10) ? '0' + value.toString() : value.toString()
@@ -77,7 +54,12 @@ export default function Timer({ memberOrder, turn, leftTime, membersNumber, setT
 
   return (
     <td className='timer' id='timer' >
-      <div className="timer__time">{hoursLeft}:{minutesLeft}:{secondsLeft}</div>
+      <div className="timer__flex-wrap">
+        <div className="flex-add"></div>
+        <div className="timer__time">{hoursLeft}:{minutesLeft}:{secondsLeft}</div>
+        <HourGlass time={time} />
+      </div>
+
     </td>
   )
 }
