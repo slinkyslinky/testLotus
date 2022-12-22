@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
+import { SERVER_URL } from '../../variables/config'
 
 import { listOfParams } from '../../variables/listOfParams'
 
@@ -18,7 +19,7 @@ type Props = {
 export default function Table({ config, members }: Props) {
 
 
-   const SERVER_URL = process.env.SERVER_URL || "http://localhost:3001/"
+
    const [timerData, setTimerData] = useState({ turn: 0, finishTime: new Date().getTime() })
    const [timerUpdate, setTimerUpdate] = useState({})
 
