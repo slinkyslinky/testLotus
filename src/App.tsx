@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.scss';
 import Header from './components/Header/Header';
 import Table from './components/Table/Table';
-import { SERVER_URL } from './variables/config';
+
 import { Config, Member } from './variables/types';
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
   const [problemMessage, setProblemMessage] = useState<string>('')
 
   // Запрос Настроек и Участников Торгов
+  const SERVER_URL = process.env.SERVER_URL || "http://localhost:3001/"
   useEffect(() => {
     fetch(SERVER_URL + "getTrade", {
       method: "GET",
