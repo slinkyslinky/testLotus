@@ -1,7 +1,8 @@
 # Test Project 
 
-You can check it on https://test-lotus.herokuapp.com/:
-Server git: https://github.com/slinkyslinky/testLotusBack
+You can check it on https://test-lotus.herokuapp.com/
+
+Git of Server: https://github.com/slinkyslinky/testLotusBack
 
 ## Technologies
 
